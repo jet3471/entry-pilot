@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entry Pilot</title>
+<link rel="icon" href="/logo.svg">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-in">
+    <img class="splash-logo" src="/logo.svg" alt="">
+    <div class="splash-name">Entry Pilot</div>
+    <div class="splash-bar"><i></i></div>
+  </div>
+  <div class="splash-credit"><span>Made by</span> <b>jet3471</b>
+    <div class="splash-links">github.com/jet3471 &nbsp;&nbsp; Threads @lchenter.ai</div></div>
+</div>
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#" data-go="home"><img src="/logo.svg" alt=""><span>Entry Pilot</span></a>
+    <nav class="tabs" id="tabs" hidden>
+      <a href="#" data-go="home">대시보드</a>
+      <a href="#" data-go="todo">확인할 일 <b class="count" id="todo-count" hidden></b></a>
+      <a href="#" data-go="contests" id="tab-contests" hidden>공모전 <b class="count" id="contest-count" hidden></b></a>
+      <a href="#" data-go="settings">설정</a>
+      <a href="#" data-go="log">기록</a>
+    </nav>
+    <span class="pill status" id="engine-pill"><i></i><span>확인 중</span></span>
+  </div>
+</header>
+
+<main id="view"></main>
+
+<footer class="foot"><span id="foot-ver"></span><a href="#" id="open-folder">앱 폴더 열기</a>
+  <span class="credit">만든 사람 <a href="https://github.com/jet3471" target="_blank" rel="noopener">jet3471 (GitHub)</a><a href="https://www.threads.com/@lchenter.ai" target="_blank" rel="noopener">Threads @lchenter.ai</a></span></footer>
+
+<template id="t-toast"><div class="toast"></div></template>
+<script src="/app.js"></script>
+</body>
+</html>

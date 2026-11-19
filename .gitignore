@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+build/work/
+build/dist/
+build/*.log
+*.db
+build/guide/_html/

@@ -1,0 +1,10 @@
+# Playbook: entry by email (the contest takes the work as an email attachment or body)
+## submit
+- Read the immutable approved submission record from the DB first: run `cp submission {{ID}}` (`{{EP}} submission {{ID}}`, i.e. `cp.py submission {{ID}}`). If it fails or returns no `submission` → `cp fail {{ID}} --agent {{AGENT}} --reason "no frozen submission record"` and stop.
+- Use ONLY that frozen record (`recipient`, `subject`, `body`, `snapshot_dir`, `attachments` with each file's `name`, `path` and `sha256`). Never read the recipient, subject, body, or attachment list from `verify_notes`, the notice, `SUBMISSION.md`, `SEND.json`, or the draft folder; never add CC/BCC recipients.
+- Before composing, verify in Python that every file in `submission.attachments` exists at its `path` in `submission.snapshot_dir` (never in `drafts`) and its SHA-256 matches `sha256` in the frozen record; on any mismatch → `cp fail {{ID}} --agent {{AGENT}} --reason "attachment hash mismatch"`.
+- Send from the entry Gmail already logged in in Chrome (open https://mail.google.com/mail/u/0/#inbox in a new tab). Never change mail settings; never delete mail.
+- Compose with the exact `recipient`, `subject`, and `body` from the frozen record, and attach ONLY `submission.attachments` in order using each attachment's snapshot `path` via `page.set_input_files("input[type=file]", path)` (wait for each file chip, ≤ 15 s). Respect the notice's attachment limits; over the limit → `cp owner {{ID}} --agent {{AGENT}} --question "<why>"`.
+- Send once. Completion = Gmail's "Message sent" toast, then open Sent and confirm the actual recipient, subject, and attachment names; finish with `cp done {{ID}} --agent {{AGENT}} --evidence "<Sent confirmation>" --sent-json '{"recipient":<recipient>,"method":"email","subject":<subject>,"body":<body>,"attachments":[{"name":"<name>","sha256":"<sha256>"}]}'` (`done` requires `--sent-json` and verifies it against the frozen record). Never resend.
+- Organizers often reply with a receipt: not required for done.
+- Consent for every mailing list or reply-address the entry creates → cp consent add.
